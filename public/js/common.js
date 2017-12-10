@@ -1,6 +1,6 @@
 
-require(['jquery', 'cookie'], function ($) {
-	
+require(['jquery', 'template', 'cookie'], function ($, template) {
+
 
 	// NProgress.start();
 	// NProgress.done();
@@ -10,7 +10,7 @@ require(['jquery', 'cookie'], function ($) {
 
 	// 实现退出功能
 	$('#logoutBtn').click(function () {
-		
+
 		$.ajax({
 			type: 'post',
 			url: '/api/logout',
@@ -36,9 +36,12 @@ require(['jquery', 'cookie'], function ($) {
 	// 使用短路运算，只有当用户信息存在时再转换，避免报错
 	loginInfo = loginInfo && JSON.parse(loginInfo)
 	// 根据得到的数据，设置用户的头像信息
-	$('.aside .profile img').attr('src', loginInfo.tc_avatar);
-	$('.aside .profile h4').html(loginInfo.tc_name);
+	// $('.aside .profile img').attr('src', loginInfo.tc_avatar);
+	// $('.aside .profile h4').html(loginInfo.tc_name);
+	var tpl = '<div class="avatar img-circle"><img src="{{tc_avatar}}"></div><h4>{{tc_name}}</h4>';
 
+	var html = template.render(tpl, loginInfo);
+	$('.aside .profile').html(html);
 
 })
 
