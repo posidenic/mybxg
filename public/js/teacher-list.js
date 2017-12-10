@@ -1,4 +1,4 @@
-define(['jquery', 'template'], function ($, template) {
+define(['jquery', 'template' ,'bootstrap'], function ($, template) {
 
     // 调用接口，获取讲师信息
     $.ajax({
@@ -31,6 +31,28 @@ define(['jquery', 'template'], function ($, template) {
                             }
                         }
                     }
+                })
+            });
+
+            // 讲师详细信息
+            $('.preview').click(function(){
+                var that = this;
+                var td = $(this).parent('td');
+                var tcId = td.attr('data-tcId');
+                var tcStatus = td.attr('data-tcStatus');
+                $.ajax({
+                    type:'get',
+                    url:'/api/teacher/view',
+                    dataType:'json',
+                    data:{
+                        tc_id:tcId
+                    },
+                    success:function(data){
+                        var html=template('modalTpl',data.result)
+                        $('#modalInfo').html(html)
+                        $('#teacherModal').modal();
+                    }
+
                 })
             });
         }
