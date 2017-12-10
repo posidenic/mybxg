@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
-    <link rel="stylesheet" href="/public/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/public/assets/nprogress/nprogress.css">
-    <link rel="stylesheet" href="/public/less/index.css">
+    <!-- 引入样式表 -->
+    <?php include('./views/common/style.html'); ?>
+
 </head>
 
 <body>
@@ -35,40 +34,11 @@
         </div>
     </div>
 
-    <script src="/public/assets/jquery/jquery.min.js"></script>
-    <script src="/public/assets/jquery-cookie/jquery.cookie.js"></script>
-    <script src="/public/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入js文件 -->
+    <?php include('./views/common/script.html'); ?>
+
     <script type="text/javascript">
-        
-        $('#loginBtn').click(function () {
-            $.ajax({
-                type:'post',
-                url:"/api/login",
-                // 使用表单序列化获取所有表单数据
-                data:$('#loginForm').serialize(),
-                dataType:'json',
-                success:function(data){
-                    // 登陆成功，跳转到主页
-                    if(data.code==200){
-                        // 把用户的登录信息存储到cookie中，方便跨页面共享登录信息的数据
-                        // 注意：cookie中只能存储字符串，所以要转换一下
-                        $.cookie('loginInfo',JSON.stringify(data.result),{path:'/'})
-
-                        location.href='/main/index';
-                    }
-                }
-            });
-
-
-
-
-
-
-
-            return false;
-        })
-
-
+        require(['login']);
     </script>
 </body>
 
