@@ -12,6 +12,8 @@ require.config({
         form: 'jquery-form/jquery.form',
         uploadify: 'uploadify/jquery.uploadify.min',
         region:'jquery-region/jquery.region',
+        ckeditor:'ckeditor/ckeditor',
+
         util: '../js/util',
         common: '../js/common',
         login: '../js/login',
@@ -31,6 +33,9 @@ require.config({
         },
         uploadify: {
             deps: ['jquery']
+        },
+        ckeditor:{  // 由于ckeditor不依赖jquery，并且向外导出了一个成员CKEDITOR，所以使用exports进行配置
+            exports:'CKEDITOR'
         }
     }
 })
